@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, Button, Card, CardBody, CardImage, CardTitle, CardText } from 'mdbreact';
 import { getApiData, postApiData } from '../services/httpService';
+import EntryModal from './entryModal';
 
 class Feed extends Component {
     state = {
         data: [],
-        post: {title:'React Article', content:'React is the UI to use'}
+        post: {title:'React Article', content:'React is the UI to use'},
+        modal8: false
     }
     async componentDidMount() {
         try{
@@ -16,29 +18,35 @@ class Feed extends Component {
             
         }        
     }
-    doSubmit = async () => {
+
+    toggle = (nr) => {
+        let modalNumber = 'modal' + nr
+        this.setState({ [modalNumber]: !this.state[modalNumber] });
+    }
+
+    doSubmit = async (data) => {
         const { user } = this.props;
-        const { post } = this.state;
-        const fullPost = {...post, user:user.pk}
+        const fullPost = {...data, user:user.pk}
         console.log(fullPost);
                 
         try {
             const { data } = await postApiData('api/', fullPost);
             const allPost = [data, ...this.state.data];
-            this.setState({ data: allPost });
+            this.setState({ data: allPost, modal8: !this.state.modal8 });
         } catch (ex) {
             
         }
     }
     render() {
-        const { data } = this.state;
+        const { data, modal8 } = this.state;
         return (
             <React.Fragment>
+                <EntryModal modal={modal8} toggle={() => this.toggle(8)} doSubmit={this.doSubmit}/>
                 <MDBContainer style={{ marginTop: "5rem" }}>
                     <MDBRow >
                         <MDBCol md="12">
                             <h2 className="text-center">Articles</h2>
-                            <Button onClick={this.doSubmit} >Post</Button>
+                            <Button onClick={() => this.toggle(8)} >Create Post</Button>
                         </MDBCol>
                         {data.map(post => (
                         <MDBCol md="4" key={post.id} style={{ marginBottom: "1.5rem" }}>
