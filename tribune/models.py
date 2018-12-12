@@ -18,3 +18,8 @@ class Article(models.Model):
     def get_all(cls):
         articles = Article.objects.all()
         return articles
+    
+    @classmethod
+    def get_single(cls, id):
+        article = Article.objects.get(id = id)
+        return article

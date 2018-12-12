@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, Button, Card, CardBody, CardImage, CardTitle, CardText } from 'mdbreact';
 import { getApiData, postApiData } from '../services/httpService';
+import { Link } from 'react-router-dom';
 import EntryModal from './entryModal';
 
 class Feed extends Component {
     state = {
         data: [],
-        post: {title:'React Article', content:'React is the UI to use'},
+        post: {title:'', content:''},
         modal8: false
     }
     async componentDidMount() {
@@ -38,10 +39,10 @@ class Feed extends Component {
         }
     }
     render() {
-        const { data, modal8 } = this.state;
+        const { data, modal8, post } = this.state;
         return (
             <React.Fragment>
-                <EntryModal modal={modal8} toggle={() => this.toggle(8)} doSubmit={this.doSubmit}/>
+                <EntryModal modal={modal8} toggle={() => this.toggle(8)} doSubmit={this.doSubmit} content={post}/>
                 <MDBContainer style={{ marginTop: "5rem" }}>
                     <MDBRow >
                         <MDBCol md="12">
@@ -57,7 +58,7 @@ class Feed extends Component {
                                     <CardText>
                                     {post.content}
                                     </CardText>
-                                    <Button>View</Button>
+                                    <Button><Link to={`/post/${post.id}`}>View</Link></Button>
                                 </CardBody>
                             </Card>
                         </MDBCol>

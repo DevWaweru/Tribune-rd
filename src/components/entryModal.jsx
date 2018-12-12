@@ -5,13 +5,17 @@ class EntryModal extends Component {
     state = {
         data: {title:"", content:""}
     }
+    componentWillReceiveProps(){        
+        const data = this.props.content;
+        this.setState({ data });
+    }
 
     handleChange = ({ currentTarget: input }) => {
         const data = {...this.state.data};
         data[input.name]=input.value;
         this.setState({ data });
     }
-
+    
     render() {
         const { modal, toggle, doSubmit } = this.props;
         const { data } = this.state;
@@ -21,8 +25,8 @@ class EntryModal extends Component {
                     <ModalHeader toggle={toggle}>Fill form to add article</ModalHeader>
                     <ModalBody>
                         <form>
-                            <MDBInput name="title" label="Title" size="lg" onChange={this.handleChange} />
-                            <MDBInput name="content" label="Type content here..." type="textarea" rows="20" onChange={this.handleChange} />
+                            <MDBInput name="title" label="Title" size="lg" onChange={this.handleChange} value={data.title}/>
+                            <MDBInput name="content" label="Type content here..." type="textarea" rows="20" onChange={this.handleChange} value={data.content}/>
                         </form>
                     </ModalBody>
                     <ModalFooter>

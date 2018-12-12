@@ -30,3 +30,32 @@ def index(request):
         else:
             return Response(data=serializer_form.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(data=serialize_posts.data, status=status.HTTP_200_OK)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((IsAuthenticated, ))
+def post(request, post_id):
+    try:
+        post = Article.get_single(post_id)
+        serialize_post = ArticleSerializer([post], many=True)
+
+        if request.method == "PUT":
+            serializer_form = ArticleSerializer(post, data=request.data)
+            if serializer_form.is_valid():
+                serializer = serializer_form.save()
+                return Response(data=serializer_form.data, status=status.HTTP_200_OK)
+            else:
+                return Response(data=serializer_form.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        if request.method == "DELETE":
+            try:
+                post.delete()
+                data = {"Success": "Post deleted successfully"}
+                return Response(data=data, status=status.HTTP_200_OK)
+            except Exception as ex:
+                print(ex)
+                data = {"Failed": f"{ex}"}
+                return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(data=serialize_post.data, status=status.HTTP_200_OK)
+    except Exception as ex:
+        return Response(data={"404": f"{ex}"}, status=status.HTTP_404_NOT_FOUND)    

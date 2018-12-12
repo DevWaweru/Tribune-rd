@@ -163,6 +163,7 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:8000',
     '10.10.10.77:3000',
     '10.10.10.77:8000',
+    'https://4b0c143e.ngrok.io/'
 )
 
 CSRF_COOKIE_NAME = "csrftoken"
