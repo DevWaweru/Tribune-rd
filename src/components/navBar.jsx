@@ -15,7 +15,7 @@ class NavBar extends Component {
     render() {
         const { user } = this.props;
         return (
-            <Navbar color="default-color" dark expand="md" scrolling fixed="top">
+            <Navbar color="purple darken-3" dark expand="md" scrolling fixed="top">
                 <NavbarBrand>
                     <Link to="/"><strong className="white-text">Tribune</strong></Link>
                 </NavbarBrand>
@@ -37,7 +37,7 @@ class NavBar extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-default" right>
                                     <Link className="dropdown-item" to="/profile">My Profile</Link>
-                                    <Link className="dropdown-item" to="/changePassword">Change Password</Link>
+                                    <Link className="dropdown-item" to="/changepassword">Change Password</Link>
                                     <Link className="dropdown-item" to="/logout">Log Out</Link>
                                 </DropdownMenu>
                             </Dropdown>

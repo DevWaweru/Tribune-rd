@@ -7,11 +7,13 @@ import Logout from './components/logout';
 import ChangePassword from './components/changePassword';
 import Post from './components/post';
 import MyPosts from './components/myPosts';
+import RegisterForm from './components/registerForm';
 
 const Routes = ({ user }) => {    
     return (
         <React.Fragment>
             <Switch>
+                <Route path="/register" exact component={RegisterForm} />
                 <Route path="/login" exact component={LoginForm} />
                 <Route path="/logout" exact component={Logout} />
                 <Route path="/changepassword" exact render={props => <ChangePassword {...props} user={user} />} />

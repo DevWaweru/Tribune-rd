@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './components/navBar';
 import Routes from './routes';
 import { getApiData } from './services/httpService';
+import './App.css';
 
 class App extends Component {
   state = {}
