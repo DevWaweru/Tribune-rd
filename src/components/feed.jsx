@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { MDBContainer, MDBRow, MDBCol, Button, Card, CardBody, CardImage, CardTitle, CardText } from 'mdbreact';
+import React, { Component, Fragment } from 'react';
+import { MDBContainer, MDBRow, MDBCol, Button } from 'mdbreact';
 import { getApiData, postApiData } from '../services/httpService';
-import { Link } from 'react-router-dom';
 import EntryModal from './entryModal';
+import PostsLayout from '../common/layout';
 
 class Feed extends Component {
     state = {
@@ -40,32 +40,24 @@ class Feed extends Component {
     }
     render() {
         const { data, modal8, post } = this.state;
+        console.log(data);
         return (
-            <React.Fragment>
-                <EntryModal modal={modal8} toggle={() => this.toggle(8)} doSubmit={this.doSubmit} content={post}/>
-                <MDBContainer style={{ marginTop: "5rem" }}>
-                    <MDBRow >
-                        <MDBCol md="12">
-                            <h2 className="text-center">Articles</h2>
-                            <Button onClick={() => this.toggle(8)} >Create Post</Button>
-                        </MDBCol>
-                        {data.map(post => (
-                        <MDBCol md="4" key={post.id} style={{ marginBottom: "1.5rem" }}>
-                            <Card style={{ width: "22rem" }}>
-                                <CardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" waves />
-                                <CardBody>
-                                    <CardTitle>{post.title}</CardTitle>
-                                    <CardText>
-                                    {post.content}
-                                    </CardText>
-                                    <Button><Link to={`/post/${post.id}`}>View</Link></Button>
-                                </CardBody>
-                            </Card>
-                        </MDBCol>
-                        ))}
-                    </MDBRow>
-                </MDBContainer>
-            </React.Fragment>
+            <Fragment>
+                {data.length === 0 ? <div className="center"><div className="loader small"></div></div> :
+                <Fragment>
+                    <EntryModal modal={modal8} toggle={() => this.toggle(8)} doSubmit={this.doSubmit} content={post}/>
+                    <MDBContainer style={{ marginTop: "5rem" }}>
+                        <MDBRow >
+                            <MDBCol md="12">
+                                <h2 className="text-center">Articles</h2>
+                                <Button color="primary" onClick={() => this.toggle(8)} >Create Post</Button>
+                            </MDBCol>
+                            <PostsLayout posts={data} />
+                        </MDBRow>
+                    </MDBContainer>
+                </Fragment>
+            }
+            </Fragment>
         );
     }
 }

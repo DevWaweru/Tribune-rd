@@ -10,5 +10,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
-    url(r'^(?P<post_id>\d+)/$', views.post, name='post')
+    url(r'^(?P<post_id>\d+)/$', views.post, name='post'),
+    url(r'^profile/(?P<user_id>\d+)/$', views.user_posts, name='userPosts'),
 ]

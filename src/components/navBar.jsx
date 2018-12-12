@@ -36,10 +36,9 @@ class NavBar extends Component {
                                     <Fa icon="user" /> {user.username}
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-default" right>
-                                    <DropdownItem href="#!">Action</DropdownItem>
-                                    <DropdownItem href="#!">Another Action</DropdownItem>
-                                    <DropdownItem><Link to='/changePassword'>Change Password</Link></DropdownItem>
-                                    <DropdownItem><Link to="/logout">Log Out</Link></DropdownItem>
+                                    <Link className="dropdown-item" to="/profile">My Profile</Link>
+                                    <Link className="dropdown-item" to="/changePassword">Change Password</Link>
+                                    <Link className="dropdown-item" to="/logout">Log Out</Link>
                                 </DropdownMenu>
                             </Dropdown>
                         </NavItem>

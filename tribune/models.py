@@ -23,3 +23,8 @@ class Article(models.Model):
     def get_single(cls, id):
         article = Article.objects.get(id = id)
         return article
+    
+    @classmethod
+    def get_user_posts(cls, id):
+        article = Article.objects.filter(user__pk=id)
+        return article

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, Button } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, Button } from 'mdbreact';
 import { getApiData, putApiData, deleteApiData } from '../services/httpService';
 import EntryModal from './entryModal';
 
@@ -7,7 +7,7 @@ class Post extends Component {
     state = {
         post: {},
         modal8: false,
-        user: {}
+        user: { pk:'', title:'', content:'' }
     }
     async componentDidMount() {
         const postId = this.props.match.params.id;
@@ -17,11 +17,10 @@ class Post extends Component {
         } catch (error) {
             if(error.response && error.response.status === 404) this.props.history.replace('/not-found');            
         }        
-    }
-    //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
-    componentWillReceiveProps({ user }) {
+        const user = this.props.user;
         this.setState({ user });
     }
+    
     toggle = (nr) => {
         let modalNumber = 'modal' + nr
         this.setState({ [modalNumber]: !this.state[modalNumber] });
@@ -50,13 +49,13 @@ class Post extends Component {
     }
     render() {
         const { match } = this.props;
-        const { post, modal8 } = this.state;
-        const { pk: currentUser } = this.state.user;
+        const { post, modal8, user } = this.state;
+        
         return (
             <React.Fragment>
                 <EntryModal modal={modal8} toggle={() => this.toggle(8)} doSubmit={this.doSubmit} content={post}/>
                 <MDBContainer style={{ marginTop: "5rem" }}>
-                    {currentUser === post.user ? 
+                    {user.pk === post.user ? 
                         <React.Fragment>
                             <Button color="primary" onClick={() => this.toggle(8)} >Edit Post</Button>
                             <Button color="danger" onClick={this.doDelete} >Delete</Button>
