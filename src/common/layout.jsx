@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { MDBCol, Card, CardBody, CardImage, CardTitle, CardText, Button } from 'mdbreact';
+import { MDBCol, Card, CardBody, CardImage, CardTitle, CardText } from 'mdbreact';
 
 const PostsLayout = ({ posts }) => {
     return (

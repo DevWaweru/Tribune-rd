@@ -1,8 +1,31 @@
-import React, { Component, Fragment} from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBIcon } from 'mdbreact';
+import React, { Component } from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBIcon, MDBModalFooter } from 'mdbreact';
+import { Link } from 'react-router-dom';
+import { register } from '../services/authService';
 
 class RegisterForm extends Component {
+    state = {
+        data: []
+    }
     
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        try{
+            const { data } = this.state;
+            await register(data);
+            const { state } = this.props.location;
+            window.location = state ? state.from.pathname : '/';
+        }catch (ex) {
+            console.log(ex);            
+        }             
+    }
+
+    handleChange = ({currentTarget: input}) => {
+        const data = {...this.state.data};
+        data[input.name]=input.value;
+        console.log(data);
+        this.setState({ data });
+    }
     render() {
         return (
             <MDBContainer>
@@ -15,62 +38,23 @@ class RegisterForm extends Component {
                                         <strong>Sign up</strong>
                                     </h3>
                                 </div>
-                                <MDBInput label="Your email" group type="text" validate />
-                                <MDBInput label="Your password" group type="password" validate />
-                                <div className="md-form pb-3">
-                                    <div className="form-check my-4">
-                                        <input
-                                            className="form-check-input"
-                                            type="checkbox"
-                                            id="defaultCheck12"
-                                        />
-                                        <label htmlFor="defaultCheck12" className="grey-text">
-                                            Accept the
-                <a href="#!" className="blue-text">
-
-                                                Terms and Conditions
-                </a>
-                                        </label>
-                                    </div>
-                                </div>
-                                <MDBRow className="d-flex align-items-center mb-4">
-                                    <MDBCol md="6" className="text-center">
-                                        <button
-                                            type="button"
-                                            className="btn btn-pink btn-block btn-rounded z-depth-1"
-                                        >
-                                            Sign up
-              </button>
-                                    </MDBCol>
-                                    <MDBCol md="6">
-                                        <p className="font-small grey-text d-flex justify-content-end">
-                                            Have an account?
-                <a href="#!" className="blue-text ml-1">
-
-                                                Log in
-                </a>
-                                        </p>
-                                    </MDBCol>
-                                </MDBRow>
+                                <form onSubmit={this.handleSubmit} >
+                                    <MDBInput label="Username" group type="text" name="username" onChange={this.handleChange} validate />
+                                    <MDBInput label="Email" group type="text" name="email" onChange={this.handleChange} validate />
+                                    <MDBInput label="Password" group type="password" name="password1" onChange={this.handleChange} validate />
+                                    <MDBInput label=" Confirm Password" group type="password" name="password2" onChange={this.handleChange} validate />
+                                    <MDBRow className="d-flex align-items-center mb-4">
+                                        <MDBCol md="12" className="text-center">
+                                            <button type="submit" className="btn btn-pink btn-block btn-rounded z-depth-1" > Sign up </button>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </form>
                             </MDBCardBody>
-                            <div className="footer pt-3 mdb-color lighten-3">
-                                <MDBRow className="d-flex justify-content-center">
-                                    <p className="font-small white-text mb-2 pt-3">
-                                        or Sign up with:
-            </p>
-                                </MDBRow>
-                                <MDBRow className="mt-2 mb-3 d-flex justify-content-center">
-                                    <a href="#!" className="fa-lg p-2 m-2 fb-ic">
-                                        <MDBIcon className="fa fa-facebook white-text fa-lg"> </MDBIcon>
-                                    </a>
-                                    <a href="#!" className="fa-lg p-2 m-2 tw-ic">
-                                        <MDBIcon className="fa fa-twitter white-text fa-lg"> </MDBIcon>
-                                    </a>
-                                    <a href="#!" className="fa-lg p-2 m-2 gplus-ic">
-                                        <MDBIcon className="fa fa-google-plus white-text fa-lg"> </MDBIcon>
-                                    </a>
-                                </MDBRow>
-                            </div>
+                            <MDBModalFooter className="mx-5 pt-3 mb-1">
+                                <p className="font-small grey-text d-flex justify-content-end"> Have an account? 
+                                    <Link to="/login" className="blue-text ml-1"><MDBIcon icon="paper-plane-o mr-2" /> Sign In </Link>
+                                </p>
+                            </MDBModalFooter>
                         </MDBCard>
                     </MDBCol>
                 </MDBRow>
