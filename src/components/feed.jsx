@@ -40,7 +40,8 @@ class Feed extends Component {
     }
     render() {
         const { data, modal8, post } = this.state;
-        console.log(data);
+        const { user } = this.props;
+        
         return (
             <Fragment>
                 {data.length === 0 ? <div className="center"><div className="loader small"></div></div> :
@@ -50,7 +51,7 @@ class Feed extends Component {
                         <MDBRow >
                             <MDBCol md="12">
                                 <h2 className="text-center">Articles</h2>
-                                <Button color="primary" onClick={() => this.toggle(8)} >Create Post</Button>
+                                {user && <Button color="primary" onClick={() => this.toggle(8)} >Create Post</Button>}
                             </MDBCol>
                             <PostsLayout posts={data} />
                         </MDBRow>
