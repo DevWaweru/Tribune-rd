@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { MDBContainer, MDBRow, MDBCol, Button } from 'mdbreact';
 import { getApiData, postApiData } from '../services/httpService';
+import { notification } from 'antd';
 import EntryModal from './entryModal';
 import PostsLayout from '../common/layout';
 
@@ -30,6 +31,13 @@ class Feed extends Component {
         this.setState({ [modalNumber]: !this.state[modalNumber] });
     }
 
+    openNotificationWithIcon = (type) => {
+        notification[type]({
+            message: 'Post Created!',
+            description: 'You have created a new post',
+        });
+    };
+
     doSubmit = async (data) => {
         const { user } = this.props;
         const fullPost = {...data, user:user.pk};
@@ -42,6 +50,7 @@ class Feed extends Component {
             const { data } = await postApiData('api/', fullPost);
             const allPost = [data, ...this.state.data];
             this.setState({ data: allPost, modal8: !this.state.modal8, isData });
+            this.openNotificationWithIcon('success');
         } catch (ex) {
             
         }

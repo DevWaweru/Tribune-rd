@@ -75,3 +75,7 @@
   border: 1px solid #80808052;
   box-shadow: 2px 4px 12px #80808054;
 }
+
+.ant-notification{
+  z-index: 1040 !important;
+}
