@@ -17,12 +17,12 @@ export async function register(data){
 }
 
 export async function updatePassword(password1, password2){
-    const res = await httpService.post(apiUpdatePassword, { password1, password2 });
+    await httpService.post(apiUpdatePassword, { password1, password2 });
 }
 
 export async function logout(){
     localStorage.removeItem('token');
-    const res = await httpService.post(apiLogout);    
+    await httpService.post(apiLogout);    
 }
 
 export function getToken(){

@@ -1,29 +1,75 @@
 import React, { Component } from 'react';
+import Joi from 'joi-browser';
+import { Alert } from 'antd';
+import { Redirect } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBModalFooter } from 'mdbreact';
 import { login } from '../services/authService';
 import { Link } from 'react-router-dom';
 
 class LoginForm extends Component {
     state = {
-        data: {username:"", password:""}
+        data: {username:"", password:""},
+        errors: {}
     }
-    handleSubmit = async (event) => {
+
+    schema = {
+        username: Joi.string().required().label('Username'),
+        password: Joi.string().required().label('Password')
+    }
+    validate = () => {
+        const options = {abortEarly: false};
+        const { error } = Joi.validate(this.state.data, this.schema, options);
+        
+        const errors = {}
+        if (!error) return null;
+        for (let item of error.details) errors[item.path[0]] = item.message;
+        return errors;
+        // return Object.keys(errors).length === 0 ? null : errors;
+    }
+
+    validateProperty = ({ name, value }) => {
+        const obj = { [name]: value } //computed properties in ES6 to take and store values dynamically
+        const schema = { [name]: this.schema[name] };
+        const { error } = Joi.validate(obj, schema );
+
+        return error ? error.details[0].message : null;
+    }
+
+    handleSubmit = (event) => {
         event.preventDefault();
+        const errors = this.validate();
+        this.setState({ errors: errors || {}  });
+
+        if (errors) return;
+        this.doSubmit();
+    }
+    doSubmit = async () => {
         try{
             const { data } = this.state;
             await login(data.username, data.password);
             const { state } = this.props.location;
             window.location = state ? state.from.pathname : '/';
         }catch (ex) {
-            console.log(ex);            
+            if (ex.response && ex.response.status === 400){
+                const errors = {...this.state.errors}
+                errors.username = "Invalid username or password";
+                this.setState({ errors });
+            }
         }             
     }
     handleChange = ({currentTarget: input}) => {
+        const errors = {...this.state.errors}
+        const errorMessage = this.validateProperty(input);
+        if (errorMessage) errors[input.name]=errorMessage;
+        else delete errors[input.name];
+
         const data = {...this.state.data};
         data[input.name]=input.value;
-        this.setState({ data });
+        this.setState({ data, errors });
     }
     render() {
+        if (localStorage.getItem('token')) return <Redirect to='/'/>
+        const { errors } = this.state;
         return (
             <React.Fragment>
                 <MDBContainer>
@@ -36,6 +82,8 @@ class LoginForm extends Component {
                                             <strong>Sign in</strong>
                                         </h3>
                                     </div>
+                                    {errors["username"] && <Alert type="error" message={errors["username"]}/>}
+                                    {errors["password"] && <Alert type="error" message={errors["password"]}/>}
                                     <form onSubmit={this.handleSubmit}>
                                         <MDBInput onChange={this.handleChange} label="Username" name="username" group type="text" validate error="wrong" success="right" />
                                         <MDBInput onChange={this.handleChange} label="Password" name="password" group type="password" validate containerClass="mb-0" />

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Navbar, NavbarBrand, NavbarNav, NavLink, NavItem, NavbarToggler, Collapse, Dropdown, DropdownToggle, DropdownMenu, MDBIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
-import { queryString } from 'query-string';
 
 class NavBar extends Component {
     state = {
