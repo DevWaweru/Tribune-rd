@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.baseURL = 'http://10.10.10.77:8000/';
 const token = localStorage.getItem('token');
 
 export async function getApiData(endpoint){

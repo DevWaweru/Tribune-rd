@@ -16,7 +16,6 @@ class Feed extends Component {
         let isData= true;
         try{
             const { data } = await getApiData('api/');
-            console.log(data);
             if (data.length===0){
                 isData= false; 
             }
@@ -86,6 +85,8 @@ class Feed extends Component {
                                     {user && <Button color="primary mb-4" onClick={() => this.toggle(8)} >Create Post</Button>}
                                     {!user && <p className="text-center">Sign in to Add and view articles</p> }
                                 </MDBCol>
+                            </MDBRow>
+                            <MDBRow>
                                 <PostsLayout posts={data} />
                             </MDBRow>
                         </MDBContainer>

@@ -161,7 +161,7 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:3000',
     'localhost:8000',
     '127.0.0.1:8000',
-    '10.10.10.77:3000',
+    '10.10.10.77:3000', # Local Ip address if you want to access localhost on other devices
     '10.10.10.77:8000',
     'https://4b0c143e.ngrok.io/'
 )

@@ -23,7 +23,6 @@ class Post extends Component {
             if(error.response && error.response.status === 404) this.props.history.replace('/not-found');            
         }
         const user = this.props.user;
-        console.log(user);
         this.setState({ user });
     }
     
@@ -35,7 +34,6 @@ class Post extends Component {
     doSubmit = async(data)=>{
         const { user, match } = this.props;
         const fullPost = {...data, user:user.pk}
-        console.log(fullPost);
                 
         try {
             const { data } = await putApiData(`api/${match.params.id}/`, fullPost);

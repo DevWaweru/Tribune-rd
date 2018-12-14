@@ -6,7 +6,7 @@ const PostsLayout = ({ posts }) => {
     return (
         <Fragment>
             {posts.map(post => (
-                <MDBCol md="4" key={post.id} style={{ marginBottom: "1.5rem" }}>
+                <MDBCol md="4" key={post.id} style={{ marginBottom: "1.5rem", display: "flex", justifyContent: "center" }}>
                     <Card style={{ width: "22rem" }}>
                         <CardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/17.jpg" waves />
                         <CardBody>
