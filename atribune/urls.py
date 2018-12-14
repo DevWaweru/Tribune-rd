@@ -17,5 +17,5 @@ urlpatterns = [
     # url(r"^registration/account-confirm-email/(?P<key>[-:\w]+)/$", ConfirmEmailView.as_view(), name='account_confirm_email'),
     # url(r'^api-auth/token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # url(r'^api-auth/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
-
+    url(r'.*', TemplateView.as_view(template_name='index.html'))
 ]

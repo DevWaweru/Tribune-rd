@@ -20,7 +20,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS=['localhost', '.ngrok.io', '10.10.10.77', '.herokuapp.com', '192.168.100.15', '127.0.0.1']
+ALLOWED_HOSTS=['localhost', '.ngrok.io', '10.10.10.77', '.herokuapp.com', 'djreact-tribune.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'atribune.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,8 +139,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
 ]
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -163,7 +163,7 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:8000',
     '10.10.10.77:3000', # Local Ip address if you want to access localhost on other devices
     '10.10.10.77:8000',
-    'https://4b0c143e.ngrok.io/'
+    'djreact-tribune.herokuapp.com'
 )
 
 CSRF_COOKIE_NAME = "csrftoken"
