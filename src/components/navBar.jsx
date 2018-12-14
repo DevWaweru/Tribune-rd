@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, NavbarNav, NavLink, NavItem, NavbarToggler, Collapse, Dropdown, DropdownToggle, DropdownMenu, Fa } from "mdbreact";
+import { Navbar, NavbarBrand, NavbarNav, NavLink, NavItem, NavbarToggler, Collapse, Dropdown, DropdownToggle, DropdownMenu, MDBIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
-
+import { queryString } from 'query-string';
 
 class NavBar extends Component {
     state = {
@@ -14,6 +14,8 @@ class NavBar extends Component {
 
     render() {
         const { user } = this.props;
+        const loca = window.location.pathname;
+        
         return (
             <Navbar color="purple darken-3" dark expand="md" scrolling fixed="top">
                 <NavbarBrand>
@@ -25,7 +27,7 @@ class NavBar extends Component {
                 <Collapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
                     <NavbarNav left>
                         <NavItem>
-                            <NavLink to="/">Home</NavLink>
+                            <NavLink to="/"></NavLink>
                         </NavItem>
                     </NavbarNav>
                     <NavbarNav right>
@@ -33,19 +35,19 @@ class NavBar extends Component {
                         <NavItem>
                             <Dropdown>
                                 <DropdownToggle nav caret>
-                                    <Fa icon="user" /> {user.username}
+                                    {user.username}
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-default" right>
-                                    <Link className="dropdown-item" to="/profile">My Profile</Link>
-                                    <Link className="dropdown-item" to="/changepassword">Change Password</Link>
-                                    <Link className="dropdown-item" to="/logout">Log Out</Link>
+                                    <Link className="dropdown-item" to="/profile"><MDBIcon icon="leaf mr-2" /> My Profile</Link>
+                                    <Link className="dropdown-item" to="/changepassword"> <MDBIcon icon="key mr-2" /> Change Password</Link>
+                                    <Link className="dropdown-item" to="/logout"><MDBIcon icon="wheelchair-alt mr-2" /> Log Out</Link>
                                 </DropdownMenu>
                             </Dropdown>
                         </NavItem>
                         }
                         {!user &&
                         <NavItem>
-                            <NavLink to="/login">Login</NavLink>
+                            {loca === "/login" ? <NavLink to="/register">Register</NavLink> : <NavLink to="/login">Login</NavLink>}
                         </NavItem>
                         }
                     </NavbarNav>

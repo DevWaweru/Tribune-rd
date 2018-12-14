@@ -45,14 +45,14 @@ class RegisterForm extends Component {
                                     <MDBInput label=" Confirm Password" group type="password" name="password2" onChange={this.handleChange} validate />
                                     <MDBRow className="d-flex align-items-center mb-4">
                                         <MDBCol md="12" className="text-center">
-                                            <button type="submit" className="btn btn-pink btn-block btn-rounded z-depth-1" > Sign up </button>
+                                            <button type="submit" className="btn btn-pink btn-block btn-rounded z-depth-1" ><MDBIcon icon="paper-plane-o mr-2" /> Sign up </button>
                                         </MDBCol>
                                     </MDBRow>
                                 </form>
                             </MDBCardBody>
                             <MDBModalFooter className="mx-5 pt-3 mb-1">
                                 <p className="font-small grey-text d-flex justify-content-end"> Have an account? 
-                                    <Link to="/login" className="blue-text ml-1"><MDBIcon icon="paper-plane-o mr-2" /> Sign In </Link>
+                                    <Link to="/login" className="blue-text ml-1"> Sign In </Link>
                                 </p>
                             </MDBModalFooter>
                         </MDBCard>

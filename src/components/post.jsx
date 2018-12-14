@@ -80,7 +80,7 @@ class Post extends Component {
                             </Fragment>
                             }
                         <h2 className="text-center">Post {match.params.id}: {post.title} </h2>
-                        <MDBRow>
+                        <MDBRow  style={{ justifyContent: 'center' }}>
                             <MDBCol md="8">
                                 <p className="text-center">{post.content}</p>
                             </MDBCol>

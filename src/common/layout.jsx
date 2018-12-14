@@ -12,7 +12,7 @@ const PostsLayout = ({ posts }) => {
                         <CardBody>
                             <CardTitle>{post.title}</CardTitle>
                             <CardText>
-                                {post.content}
+                                {post.content.substring(0,100)}...
                             </CardText>
                             <Link className="btn btn-unique Ripple-parent" to={`/post/${post.id}`}>View</Link>
                         </CardBody>
