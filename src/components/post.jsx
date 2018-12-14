@@ -56,11 +56,7 @@ class Post extends Component {
     render() {
         const { match } = this.props;
         const { post, modal8, user } = this.state;
-        if(Object.keys(post).length === 0){
-            console.log("there is nothing");
-        }else{
-            console.log("There is something");
-        }
+        
         return (
             <Fragment>
                 {Object.keys(post).length === 0 ? <div className="center"><div className="loader small"></div></div> :
@@ -78,13 +74,15 @@ class Post extends Component {
                                 <Button disabled color="danger" >Delete</Button>
                                 <p className="small text-muted">Cannot manipulate because you are not the owner of post</p>
                             </Fragment>
-                            }
-                        <h2 className="text-center">Post {match.params.id}: {post.title} </h2>
-                        <MDBRow  style={{ justifyContent: 'center' }}>
-                            <MDBCol md="8">
-                                <p className="text-center">{post.content}</p>
-                            </MDBCol>
-                        </MDBRow>
+                        }
+                        <div className="text-area">
+                            <h2 className="text-center my-3">Post {match.params.id}: {post.title} </h2>
+                            <MDBRow  style={{ justifyContent: 'center' }}>
+                                <MDBCol md="8">
+                                    <p className="text-center">{post.content}</p>
+                                </MDBCol>
+                            </MDBRow>
+                        </div>
                     </MDBContainer>
                 </Fragment>
                 }

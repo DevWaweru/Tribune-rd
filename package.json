@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.11.2",
     "axios": "^0.18.0",
+    "joi-browser": "^13.4.0",
     "mdbreact": "^4.8.4",
     "query-string": "^6.2.0",
     "react": "^16.6.3",

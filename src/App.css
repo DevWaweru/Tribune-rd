@@ -68,3 +68,10 @@
   align-items: center;
   height: -webkit-fill-available;
 }
+
+.text-area {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #80808052;
+  box-shadow: 2px 4px 12px #80808054;
+}

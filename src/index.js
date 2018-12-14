@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import 'antd/dist/antd.css';
 import 'mdbreact/dist/css/mdb.css';
 import * as serviceWorker from './serviceWorker';
 

@@ -74,7 +74,7 @@ class Feed extends Component {
                             <MDBRow>
                                 <MDBCol md="12">
                                     <h2 className="text-center">Articles</h2>
-                                    {user && <Button color="primary" onClick={() => this.toggle(8)} >Create Post</Button>}
+                                    {user && <Button color="primary mb-4" onClick={() => this.toggle(8)} >Create Post</Button>}
                                     {!user && <p className="text-center">Sign in to Add and view articles</p> }
                                 </MDBCol>
                                 <PostsLayout posts={data} />
