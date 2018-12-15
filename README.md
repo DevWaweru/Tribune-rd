@@ -1,44 +1,94 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [Tribune](https://djreact-tribune.herokuapp.com)
+### Post it here!
+### December 15th, 2018
+#### By **[Richard Waweru](https://github.com/devwaweru)**
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Description](#description)
+- [Set-up and Installations](#set-up-and-installations)
+  - [Pre-Requisites](#pre-requisites)
+  - [Clone Repository](#clone-repository)
+  - [Activate virtual environment](#activate-virtual-environment)
+  - [Install Dependencies](#install-dependencies)
+  - [Create Postgresql Database](#create-postgresql-database)
+  - [Create .env file](#create-.env-file)
+  - [Run migrations](#run-migrations)
+  - [Run app](#run-app)
+- [Technologies used](#technologies-used)
+- [Support and contact details](#support-and-contact-details)
+- [License](#license)
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Tribune displays user posts/articles. It is created using react in the front-end and django handles the backend.
+It is a bare minimal application showing how front-end React library can be used with Django as a backend application.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Set-up and Installations
+### Pre-Requisites
+1. Python 3.6
+2. Node Js 
+3. npm
+4. Postgresql
+5. Virtual Environment
 
-### `npm test`
+### Clone Repository
+Run in terminal `git clone https://github.com/DevWaweru/Tribune-rd.git && cd Tribune-rd` to clone repo
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Activate virtual environment
+Create a virtual environment using python-3.6 and activate
+```bash
+virtualenv -p python3.6 venv && source venv/bin/activate
+```
 
-### `npm run build`
+### Install dependecies
+Since the app runs on two buildpacks, React and Django, two commands will be required to install dependencies.
+React dependencies:
+```bash
+npm i
+```
+Django dependencies:
+```bash
+pip3 install -r requirements.txt
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Create postgresql database
+```bash
+psql
+create database tribune-rd
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Create .env file
+Use the [.env(sample)](https://github.com/DevWaweru/Tribune-rd/blob/master/.env(sample)) to create a .env file
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Run migrations
+```bash
+python manager migrate
+```
+### Run app
+At this point, react application and django applications coexists independently. Running `python manage.py runserver` will start the application but will bring the template not found error in the browser. This is solved by running `npm run build` which creates a build folder with the index.html file to render
 
-### `npm run eject`
+For development mode however, running the two apps seperately will cause less headaches since you will not have to run `npm run build` everytime you make changes.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Open localhost for react application
+```bash
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+open localhost for django application
+```bash
+python manage.py runserver
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Technologies used
+- Python3.6
+- Django framework
+- React JS
+- Postgresql
+- Heroku
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Support and contact details
+Contact me on developer.waweru@gmail.com for any comments, reviews or advice.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
+Copyright (c) **Richard Waweru**
