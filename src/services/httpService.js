@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://djreact-tribune.herokuapp.com/';
+axios.defaults.baseURL = 'https://localhost:8000/';
 const token = localStorage.getItem('token');
 
 export async function getApiData(endpoint){
