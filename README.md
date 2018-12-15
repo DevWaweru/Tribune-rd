@@ -12,7 +12,7 @@
   - [Activate virtual environment](#activate-virtual-environment)
   - [Install Dependencies](#install-dependencies)
   - [Create Postgresql Database](#create-postgresql-database)
-  - [Create .env file](#create-.env-file)
+  - [Create .env file](#create-env-file)
   - [Run migrations](#run-migrations)
   - [Run app](#run-app)
 - [Technologies used](#technologies-used)
@@ -58,7 +58,7 @@ psql
 create database tribune-rd
 ```
 
-### Create .env file
+### Create env file
 Use the [.env(sample)](https://github.com/DevWaweru/Tribune-rd/blob/master/.env(sample)) to create a .env file
 
 ### Run migrations
